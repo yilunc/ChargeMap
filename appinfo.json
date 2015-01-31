@@ -1,0 +1,41 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        "location",
+        "configurable"
+    ],
+    "companyName": "yilunc@hotmail.com",
+    "longName": "ChargeMap",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/brains_watch_background.png",
+                "name": "IMAGE_BACKGROUND_BRAINS",
+                "type": "png"
+            },
+            {
+                "file": "images/menu_icon_binary_watch.png",
+                "name": "IMAGE_MENU_ICON_BINARY_WATCH",
+                "type": "png"
+            },
+            {
+                "file": "images/menu_icon_sector_watch.png",
+                "name": "IMAGE_MENU_ICON_SECTOR_WATCH",
+                "type": "png"
+            },
+            {
+                "file": "images/menu_icon_big_watch.png",
+                "name": "IMAGE_MENU_ICON_BIG_WATCH",
+                "type": "png"
+            }
+        ]
+    },
+    "shortName": "ChargeMap",
+    "uuid": "60f84713-0132-49f4-9a59-d37a35a26bed",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
