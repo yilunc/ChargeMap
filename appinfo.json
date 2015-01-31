@@ -10,6 +10,11 @@
     "resources": {
         "media": [
             {
+                "file": "data/v1.csv",
+                "name": "chargeMapCSV",
+                "type": "raw"
+            },
+            {
                 "file": "images/brains_watch_background.png",
                 "name": "IMAGE_BACKGROUND_BRAINS",
                 "type": "png"
