@@ -8,7 +8,7 @@
 #define HOURS_KEY 4
 #define CONTYPE_KEY 5
 #define ACCESS_KEY 6
-  
+
 static Window *s_main_window;
 static TextLayer *s_text_layer;
 static TextLayer *l_text_layer;
@@ -19,6 +19,13 @@ char name2[32], addr2[32], city2[32], zip2[7], hours2[32], contype2[32], access2
 char name3[32], addr3[32], city3[32], zip3[7], hours3[32], contype3[32], access3[32];
 
 // AppMessage
+static void send(int key, int message) {
+  DictionaryIterator *iter;
+  app_message_outbox_begin(&iter);
+  
+  dict_write_int(iter, key, &message, sizeof(int), true);
+  app_message_outbox_send();
+}
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
   text_layer_set_text(l_text_layer, "Locating...");
   // Get the first pair
@@ -109,7 +116,18 @@ static void outbox_failed_callback(DictionaryIterator *iterator, AppMessageResul
 }
 
 static void outbox_sent_callback(DictionaryIterator *iterator, void *context) {
+  
   APP_LOG(APP_LOG_LEVEL_INFO, "Outbox send success!");
+}
+
+static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+  text_layer_set_text(l_text_layer, "Starting");
+  send(0, 0);
+}
+
+static void click_config_provider(void *context) {
+  // Assign button handlers
+  window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
 }
 
 static void main_window_load(Window *window) {
@@ -178,7 +196,7 @@ static void init() {
     .unload = menu_window_unload,
   });*/
   
-  //window_set_click_config_provider(s_main_window, click_config_provider);
+  window_set_click_config_provider(s_main_window, click_config_provider);
   window_stack_push(s_main_window, true);
 }
 
