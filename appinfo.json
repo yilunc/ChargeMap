@@ -1,10 +1,18 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "ACCESS_KEY": 6,
+        "ADDRESS_KEY": 1,
+        "CITY_KEY": 2,
+        "CONTYPE_KEY": 5,
+        "HOURS_KEY": 4,
+        "NAME_KEY": 0,
+        "ZIP_KEY": 3
+    },
     "capabilities": [
         "location",
         "configurable"
     ],
-    "companyName": "yilunc@hotmail.com",
+    "companyName": "ChargeMap",
     "longName": "ChargeMap",
     "projectType": "native",
     "resources": {
@@ -27,6 +35,11 @@
             {
                 "file": "images/menu_icon_big_watch.png",
                 "name": "IMAGE_MENU_ICON_BIG_WATCH",
+                "type": "png"
+            },
+            {
+                "file": "images/chargeMapLogoSmall.png",
+                "name": "LOGO_SMALL_ID",
                 "type": "png"
             }
         ]
