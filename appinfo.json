@@ -4,19 +4,19 @@
         "location",
         "configurable"
     ],
-    "companyName": "yilunc@hotmail.com",
+    "companyName": "ChargeMap",
     "longName": "ChargeMap",
     "projectType": "native",
     "resources": {
         "media": [
             {
-                "file": "images/brains_watch_background.png",
-                "name": "IMAGE_BACKGROUND_BRAINS",
+                "file": "images/chargeMapLogoSmall.png",
+                "name": "LOGO_SMALL_ID",
                 "type": "png"
             },
             {
-                "file": "images/menu_icon_binary_watch.png",
-                "name": "IMAGE_MENU_ICON_BINARY_WATCH",
+                "file": "images/menu_icon_big_watch.png",
+                "name": "IMAGE_MENU_ICON_BIG_WATCH",
                 "type": "png"
             },
             {
@@ -25,8 +25,13 @@
                 "type": "png"
             },
             {
-                "file": "images/menu_icon_big_watch.png",
-                "name": "IMAGE_MENU_ICON_BIG_WATCH",
+                "file": "images/menu_icon_binary_watch.png",
+                "name": "IMAGE_MENU_ICON_BINARY_WATCH",
+                "type": "png"
+            },
+            {
+                "file": "images/brains_watch_background.png",
+                "name": "IMAGE_BACKGROUND_BRAINS",
                 "type": "png"
             }
         ]
