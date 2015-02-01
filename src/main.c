@@ -1,5 +1,13 @@
 #include <pebble.h>
 
+#define NAME_KEY 0  
+#define ADDRESS_KEY 1
+#define CITY_KEY 2
+#define ZIP_KEY 3
+#define HOURS_KEY 4
+#define CONTYPE_KEY 5
+#define ACCESS_KEY 6
+  
 static Window *s_main_window;
 static Window *menu_window;
 static Window *info_window;
@@ -7,6 +15,27 @@ static TextLayer *s_text_layer;
 static TextLayer *l_text_layer;
 static MenuLayer *menu_layer;
 static GBitmap* s_logo_bitmap;
+
+char name[32], addr[32], city[32], zip[7], hours[32], contype[32], access[32];
+char name2[32], addr2[32], city2[32], zip2[7], hours2[32], contype2[32], access2[32];
+char name3[32], addr3[32], city3[32], zip3[7], hours3[32], contype3[32], access3[32];
+
+enum {
+    KEY_BUTTON_EVENT = 0,
+    BUTTON_EVENT_UP = 1,
+    BUTTON_EVENT_DOWN = 2,
+    BUTTON_EVENT_SELECT = 3
+};
+
+void send_int(uint8_t key, uint8_t cmd){
+    DictionaryIterator *iter;
+    app_message_outbox_begin(&iter);
+      
+    Tuplet value = TupletInteger(key, cmd);
+    dict_write_tuplet(iter, &value);
+      
+    app_message_outbox_send();
+}
 
 static void info_window_load(Window *window){
   s_logo_bitmap = gbitmap_create_with_resource(RESOURCE_ID_LOGO_MENU_ID);
@@ -64,13 +93,13 @@ static void draw_row_callback(GContext *ctx, Layer *cell_layer, MenuIndex *cell_
     //Which row is it?
     switch(cell_index->row){
     case 0:
-        menu_cell_basic_draw(ctx, cell_layer, "1. Location #1", "Address, Zip, City", NULL);
+        menu_cell_basic_draw(ctx, cell_layer, name, addr, NULL);
         break;
     case 1:
-        menu_cell_basic_draw(ctx, cell_layer, "2. Location #2", "Address, Zip, City", NULL);
+        menu_cell_basic_draw(ctx, cell_layer, name2, addr2, NULL);
         break;
     case 2:
-        menu_cell_basic_draw(ctx, cell_layer, "3. Location #3", "Address, Zip, City", NULL);
+        menu_cell_basic_draw(ctx, cell_layer, name3, addr3, NULL);
         break;
     }
 }
@@ -126,6 +155,8 @@ static void down_single_click_handler(ClickRecognizerRef recognizer, void *conte
     .unload = menu_window_unload
   });
   window_stack_push(menu_window, true);
+  text_layer_set_text(l_text_layer, "Starting");
+  send_int(KEY_BUTTON_EVENT, BUTTON_EVENT_SELECT);
 }
 
 static void config_provider(Window *window){
@@ -134,8 +165,81 @@ static void config_provider(Window *window){
     window_single_click_subscribe(BUTTON_ID_SELECT, down_single_click_handler);
 }
 
+static void in_received_handler(DictionaryIterator *iter, void *context){
+    Tuple *t = dict_read_first(iter);
+    while(t!= NULL){
+      switch(t->key){
+        case NAME_KEY:
+          if(strcmp(name, "") != 0)
+            if(strcmp(name2, "") != 0)
+              strcpy(name3, t->value->cstring);
+            else
+              strcpy(name2, t->value->cstring);
+          else
+            strcpy(name, t->value->cstring);
+        break;
+        case ADDRESS_KEY:
+          if(strcmp(addr, "") != 0)
+            if(strcmp(addr2, "") != 0)
+              strcpy(addr3, t->value->cstring);
+            else
+              strcpy(addr2, t->value->cstring);
+          else
+            strcpy(addr, t->value->cstring);
+        break;
+        case CITY_KEY:
+          if(strcmp(city, "") != 0)
+            if(strcmp(city2, "") != 0)
+              strcpy(city3, t->value->cstring);
+            else
+              strcpy(city2, t->value->cstring);
+          else
+            strcpy(city, t->value->cstring);
+        break;
+        case ZIP_KEY:
+          if(strcmp(zip, "") != 0)
+            if(strcmp(zip2, "") != 0)
+              strcpy(zip3, t->value->cstring);
+            else
+              strcpy(zip2, t->value->cstring);
+          else
+            strcpy(zip, t->value->cstring);
+        break;
+        case HOURS_KEY:
+          if(strcmp(hours, "") != 0)
+            if(strcmp(hours2, "") != 0)
+              strcpy(hours3, t->value->cstring);
+            else
+              strcpy(hours2, t->value->cstring);
+          else
+            strcpy(hours, t->value->cstring);
+        break;
+        case CONTYPE_KEY:
+          if(strcmp(contype, "") != 0)
+            if(strcmp(contype2, "") != 0)
+              strcpy(contype3, t->value->cstring);
+            else
+              strcpy(contype2, t->value->cstring);
+          else
+            strcpy(contype, t->value->cstring);
+        break;
+        case ACCESS_KEY:
+          if(strcmp(access, "") != 0)
+            if(strcmp(access2, "") != 0)
+              strcpy(access3, t->value->cstring);
+            else
+              strcpy(access2, t->value->cstring);
+          else
+            strcpy(access, t->value->cstring);
+        break;
+      }
+    t = dict_read_next(iter);
+    }
+}
+
 static void init() {
-  // Create main Window
+  app_message_register_inbox_received(in_received_handler);           
+  app_message_open(512, 512);
   s_main_window = window_create();
   window_set_window_handlers(s_main_window, (WindowHandlers) {
     .load = main_window_load,
