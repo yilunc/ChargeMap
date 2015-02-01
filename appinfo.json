@@ -18,6 +18,12 @@
     "resources": {
         "media": [
             {
+                "file": "images/chargeMapLogoMenu.png",
+                "menuIcon": true,
+                "name": "LOGO_MENU_ID",
+                "type": "png"
+            },
+            {
                 "file": "images/brains_watch_background.png",
                 "name": "IMAGE_BACKGROUND_BRAINS",
                 "type": "png"
