@@ -1,5 +1,13 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "ACCESS_KEY": 6,
+        "ADDRESS_KEY": 1,
+        "CITY_KEY": 2,
+        "CONTYPE_KEY": 5,
+        "HOURS_KEY": 4,
+        "NAME_KEY": 0,
+        "ZIP_KEY": 3
+    },
     "capabilities": [
         "location",
         "configurable"
@@ -32,6 +40,12 @@
             {
                 "file": "images/brains_watch_background.png",
                 "name": "IMAGE_BACKGROUND_BRAINS",
+                "type": "png"
+            },
+            {
+                "file": "images/chargeMapLogoMenu.png",
+                "menuIcon": true,
+                "name": "LOGO_MENU_ID",
                 "type": "png"
             }
         ]
