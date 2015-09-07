@@ -1,6 +1,6 @@
 # ChargeMap
 
-###Winner at SBHacks 2015 :)
+###Winner at SB Hacks 2015 :)
 
 ####Pebble App
 
